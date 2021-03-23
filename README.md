@@ -4,5 +4,21 @@ Com RestAssured podemos testar serviços Rest em Java de uma forma mais prática
 
 O RestAssured suporta os métodos POST, GET, PUT, DELETE, OPTIONS, PATCH e HEAD e pode servir para avaliar o retorno dessas requisições.
 
-<img width="801" alt="rest-assured-logo" src="https://user-images.githubusercontent.com/56838974/97794850-e80fbd00-1bdd-11eb-9d81-789e8d4ce012.png">
+## Execução
 
+Para executar testes com RestAssured, basta realizar a importação da dependência:
+
+```
+<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>rest-assured</artifactId>
+    <version>4.3.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+> Há diversas outras dependências que podemos acrescentar em um projeto restassured, tudo depende da necessidade, porém para esse caso utilizaremos apenas uma. Recomendo visualizar outros projetos aqui do repositório com uma arquitetura mais robusta, para melhor esclarecimento.
+
+
+Pelo Maven, podemos executar os testes através do comando:
+> Mvn test
