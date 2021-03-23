@@ -17,8 +17,8 @@ Para executar testes com RestAssured, basta realizar a importação da dependên
 </dependency>
 ```
 
-> Há diversas outras dependências que podemos acrescentar em um projeto restassured, tudo depende da necessidade, porém para esse caso utilizaremos apenas uma. Recomendo visualizar outros projetos aqui do repositório com uma arquitetura mais robusta, para melhor esclarecimento.
+ Há diversas outras dependências que podemos acrescentar em um projeto restassured, tudo depende da necessidade, porém para esse caso utilizaremos apenas uma. Recomendo visualizar outros projetos aqui do repositório com uma arquitetura mais robusta, para melhor esclarecimento.
 
 
 Pelo Maven, podemos executar os testes através do comando:
-> Mvn test
+> mvn test
