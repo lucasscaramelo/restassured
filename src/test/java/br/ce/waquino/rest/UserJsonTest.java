@@ -7,6 +7,7 @@ import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
@@ -21,9 +22,9 @@ public class UserJsonTest {
     @Test
     public void primeiroNivelBody() {
         given()
-                .when()
+        .when()
                 .get(url + "/1")
-                .then()
+        .then()
                 .statusCode(200)
                 .body("id", is(1))
                 .body("name", containsString("Silva"))
@@ -49,9 +50,9 @@ public class UserJsonTest {
     @Test
     public void segundoNivelBody() {
         given()
-                .when()
+        .when()
                 .get(url + "/2")
-                .then()
+        .then()
                 .statusCode(200)
                 .body("name", containsString("Joaquina"))
                 .body("endereco.rua", is("Rua dos bobos")); // acessa endereco.rua (segundo nivel)
@@ -60,9 +61,9 @@ public class UserJsonTest {
     @Test
     public void listaObjetosBody() {
         given()
-                .when()
+        .when()
                 .get(url + "/2")
-                .then()
+        .then()
                 .statusCode(200)
                 .body("name", containsString("Ana"))
                 .body("filhos", hasSize(2)) // verifica quantos objetos tem na lista
@@ -84,9 +85,9 @@ public class UserJsonTest {
     @Test
     public void listaRaiz() {
         given()
-                .when()
+        .when()
                 .get(url)
-                .then()
+        .then()
                 .statusCode(200)
                 .body("$", hasSize(3))
                 .body("name", hasItems("João da Silva", "Maria Joaquina", "Ana Júlia"))
@@ -98,9 +99,9 @@ public class UserJsonTest {
     @Test
     public void verificacoesAvancadas() {
         given()
-                .when()
+        .when()
                 .get(url)
-                .then()
+        .then()
                 .statusCode(200)
                 .body("$", hasSize(3))
                 .body("age.findAll{it == 25}.size()", is(1)) // busca usuarios com 25 anos de idade
@@ -119,5 +120,20 @@ public class UserJsonTest {
                 .body("salary.min()", is(1234.5678f)) //busca o menor salario
                 .body("salary.findAll{it != null}.sum()", is(closeTo(3734.5678f, 0.001))) //soma os salarios
                 .body("salary.findAll{it != null}.sum()", allOf(greaterThan(3000d), lessThan(5000d)));
+    }
+
+    @Test
+    public void jsonPathJava() {
+        ArrayList<String> nomes =
+        given()
+        .when()
+                .get(url)
+        .then()
+                .statusCode(200)
+                .extract().path("nome.findAll{it.startsWirh('Maria')}");
+
+        Assert.assertEquals(1, nomes.size());
+        Assert.assertTrue(nomes.get(0).equalsIgnoreCase("maria joaquina")); // verifica se existe o nome independente do jeito que foi escrito
+        Assert.assertEquals(nomes.get(0).toUpperCase(), "maria joaquina".toUpperCase());
     }
 }
