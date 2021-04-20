@@ -56,4 +56,17 @@ public class OlaMundoTest {
         Assert.assertThat(impar, Matchers.hasItem(6));
         Assert.assertThat(impar, Matchers.hasItems(6, 7, 8));
     }
+
+    @Test
+    public void validandoBody() {
+        RestAssured.given()
+                    .when()
+                        .get(url)
+                    .then()
+                        .statusCode(200)
+                        .body(Matchers.is("Ola Mundo!"))
+                        .body(Matchers.containsString("Mundo"))
+                        .body(Matchers.is(Matchers.notNullValue()));
+    }
+    
 }
