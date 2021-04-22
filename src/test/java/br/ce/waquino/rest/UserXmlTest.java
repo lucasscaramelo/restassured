@@ -83,8 +83,7 @@ public class UserXmlTest {
                 .body(hasXPath("count(/users/user)", is("3")))
                 .body(hasXPath("/users/user[@id = '1']"))
                 .body(hasXPath("//user[@id = '1']"))
-                .body(hasXPath("//name[text() = 'Luizinho']/../../name", is("Ana Julia")))
-
+                .body(hasXPath("//name[text() = 'Luizinho']/../../name", is("Ana Julia")));
     }
 
 }
